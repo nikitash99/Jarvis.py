@@ -5,6 +5,7 @@ import wikipedia #pip install wikipedia
 import webbrowser
 import os
 import smtplib
+from ecapture import ecapture as ec
 
 
 engine = pyttsx3.init('sapi5')
@@ -58,7 +59,7 @@ def sendEmail(to, content):
     server.ehlo()
     server.starttls()
     server.login('nikkish1999@gmail.com', 'sharmafam')
-    server.sendmail('nikkish1999@gmail.com', to, content)
+    server.sendmail('priyankasharma26914@gmail.com', to, content)
     server.close()
 
 if __name__ == "__main__":
@@ -77,14 +78,24 @@ if __name__ == "__main__":
             speak(results)
 
         elif 'open youtube' in query:
+            speak("Here you go to Youtube\n")
             webbrowser.open("youtube.com")
 
         elif 'open google' in query:
+            speak("Here you go to Google\n")
             webbrowser.open("google.com")
 
         elif 'open stackoverflow' in query:
-            webbrowser.open("stackoverflow.com")   
+            speak("Here you go to Stackoverflow\n")
+            webbrowser.open("stackoverflow.com")  
 
+        elif 'open instagram' in query:
+            speak("Here you go to Instagram\n")
+            webbrowser.open("instagram.com")  
+
+        elif 'open github' in query:
+            speak("Here you go to Github\n")
+            webbrowser.open("github.com")    
 
         elif 'play music' in query:
             music_dir = 'Music'
@@ -94,17 +105,25 @@ if __name__ == "__main__":
 
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
-            speak(f"Sir, the time is {strTime}")
+            speak(f"Ma'am , the time is {strTime}")
+
+        elif "camera" in query or "take a photo" in query:
+            ec.capture(0, "Jarvis Camera ", "img.jpg")    
+            
 
         elif 'open code' in query:
             codePath = "C:\\Users\\user\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code"
             os.startfile(codePath)
 
-        elif 'email to nikita' in query:
+        elif 'exit' in query:
+            speak("Thanks for giving me your time")
+            exit()
+
+        elif 'email to priyanka' in query:
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "priyankash26914@gmail.com"    
+                to = "priyankasharma26914@gmail.com"    
                 sendEmail(to, content)
                 speak("Email has been sent!")
             except Exception as e:
